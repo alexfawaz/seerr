@@ -14,6 +14,7 @@ const messages = defineMessages('components.Settings', {
   menuJellyfinSettings: '{mediaServerName}',
   menuServices: 'Services',
   menuNetwork: 'Network',
+  menuBroadcast: 'Broadcast',
   menuNotifications: 'Notifications',
   menuLogs: 'Logs',
   menuJobs: 'Jobs & Cache',
@@ -69,6 +70,11 @@ const SettingsLayout = ({ children }: SettingsLayoutProps) => {
       text: intl.formatMessage(messages.menuNotifications),
       route: '/settings/notifications/email',
       regex: /^\/settings\/notifications/,
+    },
+    {
+      text: intl.formatMessage(messages.menuBroadcast),
+      route: '/settings/broadcast',
+      regex: /^\/settings\/broadcast/,
     },
     {
       text: intl.formatMessage(messages.menuLogs),

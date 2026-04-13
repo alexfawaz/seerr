@@ -3891,6 +3891,62 @@ paths:
       responses:
         '204':
           description: All sliders reset to defaults
+  /settings/broadcast:
+    post:
+      summary: Send broadcast notification
+      description: Send a push notification to all subscribed users or specific users (admin only).
+      tags:
+        - settings
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - title
+                - body
+              properties:
+                title:
+                  type: string
+                  maxLength: 50
+                  example: 'Server Maintenance'
+                body:
+                  type: string
+                  maxLength: 120
+                  example: 'Scheduled downtime tonight at 10 PM'
+                url:
+                  type: string
+                  example: '/settings'
+                userIds:
+                  type: array
+                  items:
+                    type: integer
+                  description: Optional list of user IDs. If omitted, sends to all users.
+      responses:
+        '200':
+          description: Broadcast results
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  sent:
+                    type: integer
+                    example: 5
+                  failed:
+                    type: integer
+                    example: 1
+        '400':
+          description: VAPID keys not configured
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden (non-admin)
+        '422':
+          description: Validation error
+        '429':
+          description: Rate limited (less than 60 seconds since last broadcast)
   /settings/about:
     get:
       summary: Get server stats

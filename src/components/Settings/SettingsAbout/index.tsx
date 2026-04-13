@@ -75,6 +75,9 @@ const SettingsAbout = () => {
             <code className="truncate">
               {data.version.replace('develop-', '')}
             </code>
+            <Badge badgeType="primary" className="ml-2">
+              +broadcast
+            </Badge>
             {status?.commitTag !== 'local' &&
               (status?.updateAvailable ? (
                 <a
